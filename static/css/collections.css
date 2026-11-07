@@ -76,7 +76,9 @@
 }
 
 .cert-hero-stack__card img {
+  display: block;
   width: 100%;
+  height: auto;
 }
 
 .cert-hero-stack__card--1 {

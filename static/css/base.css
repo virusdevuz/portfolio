@@ -1019,12 +1019,13 @@ body.cursor-hover .cursor__ring {
   z-index: 999;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.4s var(--ease), visibility 0.4s;
+  transition: opacity 0.4s var(--ease), visibility 0s linear 0.4s;
 }
 
 .mobile-menu.is-open {
   opacity: 1;
   visibility: visible;
+  transition: opacity 0.4s var(--ease), visibility 0s;
 }
 
 .mobile-menu__scrim {
@@ -1546,12 +1547,13 @@ body.cursor-hover .cursor__ring {
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.35s, visibility 0.35s;
+  transition: opacity 0.35s, visibility 0s linear 0.35s;
 }
 
 .modal.is-open {
   opacity: 1;
   visibility: visible;
+  transition: opacity 0.35s, visibility 0s;
 }
 
 .modal__scrim {
