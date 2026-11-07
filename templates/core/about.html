@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container page-hero__grid">
+    <div class="page-hero__copy">
+      <div class="eyebrow" data-reveal>About me <span class="eyebrow__sep"></span> The story so far</div>
+      <h1 class="page-hero__title" data-reveal data-delay="1">More than <span class="text-gradient">code.</span></h1>
+      <p class="page-hero__lead" data-reveal data-delay="2">
+        A young developer from Bukhara with a big respect for craft, a soft spot for
+        beautiful interfaces and a habit of turning curiosity into projects.
+      </p>
+      <div class="page-hero__meta" data-reveal data-delay="3">
+        <span><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>{{ site.location }}</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg>{{ site.role }}</span>
+      </div>
+    </div>
+    <div class="page-hero__aside" data-reveal data-delay="2">
+      <div class="mini-profile glass">
+        <div class="mini-profile__image">
+          <img src="{{ media_url }}image-majidov-abdurakhmon-2.png" alt="{{ site.name }}" width="962" height="1635">
+        </div>
+        <div class="mini-profile__body">
+          <span class="chip chip--live"><span class="status-dot"></span>{{ site.availability }}</span>
+          <strong>{{ site.name }}</strong>
+          <span>{{ site.role }}</span>
+          <div class="mini-profile__stats">
+            <div><strong>15</strong><span>years old</span></div>
+            <div><strong>3+</strong><span>years coding</span></div>
+            <div><strong>10+</strong><span>certificates</span></div>
+          </div>
+        </div>
+      </div>
+      <span class="page-hero__orb page-hero__orb--1" aria-hidden="true"></span>
+      <span class="page-hero__orb page-hero__orb--2" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container about-grid">
+    <div class="about-media" data-reveal>
+      <div class="photo-frame glass" data-tilt>
+        <img src="{{ media_url }}image-majidov-abdurakhmon.png" alt="{{ site.name }} in his workspace" width="1086" height="1448">
+        <div class="photo-frame__badge glass">
+          <svg class="icon" aria-hidden="true"><use href="#i-cpu"/></svg>
+          <span>PC building is my happy place</span>
+        </div>
+      </div>
+      <div class="about-media__note glass">
+        <span class="about-media__note-icon"><svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg></span>
+        <div>
+          <strong>Currently exploring</strong>
+          <span>TypeScript, advanced Django &amp; better motion design</span>
+        </div>
+      </div>
+      <div class="about-media__ring" aria-hidden="true"></div>
+    </div>
+
+    <div class="about-copy" data-reveal data-delay="1">
+      <span class="eyebrow">My story</span>
+      <h2 class="section-title">From a curious kid to a <span class="text-gradient">full-stack builder.</span></h2>
+      <p class="lead">
+        I first became interested in IT in the fifth grade. For the next few years I kept
+        learning — how computers work, how websites are made, and how a few lines of code
+        can become something people actually use.
+      </p>
+      <p>
+        By the ninth grade I had started building my own projects. I learned frontend
+        development, then Python, then the joy of connecting a real interface to a real
+        database. Today I work across the stack: HTML, CSS, SCSS, SASS, JavaScript,
+        Python, Django and Node.js.
+      </p>
+      <p>
+        I have studied online through <strong>Mohirdev</strong>, <strong>UpoUnity</strong>
+        and other trusted platforms, and I keep learning by reading technical articles,
+        experimenting with new tools and rebuilding things until they feel right.
+      </p>
+      <div class="about-copy__signature">
+        <img src="{{ media_url }}logo-removedbg.png" alt="" width="1536" height="828">
+        <div>
+          <strong>{{ site.name }}</strong>
+          <span>{{ site.role }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <div>
+        <span class="eyebrow" data-reveal>The essentials</span>
+        <h2 class="section-title" data-reveal data-delay="1">A few quick <span class="text-gradient">facts.</span></h2>
+      </div>
+    </div>
+    <div class="facts-grid">
+      {% for fact in quick_facts %}
+        <div class="fact glass" data-reveal data-delay="{{ forloop.counter0 }}">
+          <span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-{{ fact.icon }}"/></svg></span>
+          <div>
+            <span class="fact__label">{{ fact.label }}</span>
+            {% if fact.href %}
+              <a class="fact__value" href="{{ fact.href }}">{{ fact.value }}</a>
+            {% else %}
+              <span class="fact__value">{{ fact.value }}</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow" data-reveal>The journey</span>
+        <h2 class="section-title" data-reveal data-delay="1">A timeline of <span class="text-gradient">small steps.</span></h2>
+      </div>
+      <p class="section-head__note" data-reveal data-delay="2">Every project started with a question I could not stop thinking about.</p>
+    </div>
+
+    <div class="timeline">
+      {% for item in journey %}
+        <article class="timeline__item glass" data-reveal data-delay="{{ forloop.counter0 }}">
+          <div class="timeline__marker">
+            <svg class="icon" aria-hidden="true"><use href="#i-{{ item.icon }}"/></svg>
+          </div>
+          <div class="timeline__content">
+            <span class="timeline__phase">{{ item.phase }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow" data-reveal>The toolkit</span>
+        <h2 class="section-title" data-reveal data-delay="1">Skills I use to <span class="text-gradient">make things.</span></h2>
+      </div>
+      <p class="section-head__note" data-reveal data-delay="2">Percentages are my honest self-assessment — always moving, never finished.</p>
+    </div>
+
+    <div class="skills-layout">
+      <div class="skills-panel glass" data-reveal>
+        {% for skill in skills %}
+          <div class="skill-row">
+            <div class="skill-row__top">
+              <span>{{ skill.name }} <small>{{ skill.note }}</small></span>
+              <strong>{{ skill.level }}%</strong>
+            </div>
+            <div class="skill-row__track">
+              <span data-skill-fill style="--level: {{ skill.level }}%; --bar-color: {{ skill.color }};"></span>
+            </div>
+          </div>
+        {% endfor %}
+        <div class="skills-panel__footer">
+          <span><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg>Built with practice, not shortcuts</span>
+          <span>Last updated · 2026</span>
+        </div>
+      </div>
+
+      <div class="skills-aside">
+        <div class="skills-aside__card glass" data-reveal data-delay="1">
+          <span class="skills-aside__icon accent--violet"><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg></span>
+          <h3>Technical toolbox</h3>
+          <div class="tag-row">
+            {% for tool in toolbox %}
+              <span class="tag">{{ tool }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="skills-aside__card glass" data-reveal data-delay="2">
+          <span class="skills-aside__icon accent--cyan"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <h3>How I work</h3>
+          <ul class="mini-list">
+            <li>Understand the problem before writing code</li>
+            <li>Keep the interface fast and accessible</li>
+            <li>Communicate clearly and share progress</li>
+            <li>Leave every codebase cleaner than I found it</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <div>
+        <span class="eyebrow" data-reveal>What I value</span>
+        <h2 class="section-title" data-reveal data-delay="1">The principles behind <span class="text-gradient">the work.</span></h2>
+      </div>
+    </div>
+    <div class="value-grid">
+      {% for value in values %}
+        <article class="value-card glass spotlight" data-spotlight-card data-reveal data-delay="{{ forloop.counter0 }}">
+          <span class="value-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-{{ value.icon }}"/></svg></span>
+          <span class="value-card__number">0{{ forloop.counter }}</span>
+          <h3>{{ value.title }}</h3>
+          <p>{{ value.description }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow" data-reveal>Beyond the screen</span>
+        <h2 class="section-title" data-reveal data-delay="1">When I'm not <span class="text-gradient">coding.</span></h2>
+      </div>
+    </div>
+    <div class="hobby-grid">
+      {% for hobby in hobbies %}
+        <article class="hobby-card glass" data-reveal data-delay="{{ forloop.counter0 }}">
+          <span class="hobby-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-{{ hobby.icon }}"/></svg></span>
+          <h3>{{ hobby.title }}</h3>
+          <p>{{ hobby.description }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.html" %}
+{% endblock %}

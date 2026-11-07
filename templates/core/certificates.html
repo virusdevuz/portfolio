@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container page-hero__grid">
+    <div class="page-hero__copy">
+      <div class="eyebrow" data-reveal>Certificates <span class="eyebrow__sep"></span> Learning in public</div>
+      <h1 class="page-hero__title" data-reveal data-delay="1">Proof of <span class="text-gradient">learning.</span></h1>
+      <p class="page-hero__lead" data-reveal data-delay="2">
+        Ten certificates from Mohirdev — a record of the courses, late-night lessons and
+        small milestones that shaped the way I build for the web.
+      </p>
+      <div class="page-hero__meta" data-reveal data-delay="3">
+        <span><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg>{{ total }} certificates</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-graduation"/></svg>Online courses</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg>Completed</span>
+      </div>
+    </div>
+
+    <div class="page-hero__aside" data-reveal data-delay="2">
+      <div class="cert-hero-stack">
+        {% for cert in certificates|slice:":3" %}
+          <div class="cert-hero-stack__card cert-hero-stack__card--{{ forloop.counter }}">
+            <img src="{{ media_url }}{{ cert.image }}" alt="" width="1400" height="990" loading="lazy">
+          </div>
+        {% endfor %}
+        <span class="cert-hero-stack__badge glass">
+          <svg class="icon" aria-hidden="true"><use href="#i-award"/></svg>
+          <span><strong>{{ total }}</strong>certificates</span>
+        </span>
+      </div>
+      <span class="page-hero__orb page-hero__orb--1" aria-hidden="true"></span>
+      <span class="page-hero__orb page-hero__orb--2" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="filter-bar glass" data-filter-group="certificates" role="group" aria-label="Filter certificates by category">
+      {% for category in categories %}
+        <button class="filter-btn{% if forloop.first %} is-active{% endif %}" type="button" data-filter="{{ category }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+          {{ category }}
+          {% if forloop.first %}<span class="filter-btn__count">{{ total }}</span>{% endif %}
+        </button>
+      {% endfor %}
+    </div>
+
+    <div class="cert-grid" id="certificateGrid" data-filter-grid="certificates">
+      {% for cert in certificates %}
+        <article class="cert-card glass" data-category="{{ cert.category }}" data-reveal data-delay="{{ forloop.counter0 }}">
+          <button class="cert-card__button" type="button"
+                  data-cert-open
+                  data-cert-id="{{ cert.id }}"
+                  data-cert-title="{{ cert.title }}"
+                  data-cert-category="{{ cert.category }}"
+                  data-cert-image="{{ media_url }}{{ cert.image }}"
+                  data-cert-description="{{ cert.description }}"
+                  data-cert-skills="{{ cert.skills|join:'|' }}"
+                  data-cert-issuer="{{ cert.issuer }}"
+                  aria-label="View {{ cert.title }} certificate">
+            <span class="cert-card__image">
+              <img src="{{ media_url }}{{ cert.image }}" alt="{{ cert.title }} certificate" width="1400" height="990" loading="lazy">
+              <span class="cert-card__overlay">
+                <span class="cert-card__zoom"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span>
+                <span class="cert-card__view">Click to view</span>
+              </span>
+              <span class="cert-card__id">{{ cert.id }}</span>
+            </span>
+            <span class="cert-card__body">
+              <span class="cert-card__meta">
+                <span>{{ cert.category }}</span>
+                <span>{{ cert.issuer }}</span>
+              </span>
+              <strong class="cert-card__title">{{ cert.title }}</strong>
+              <span class="cert-card__hint">View certificate <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
+            </span>
+          </button>
+        </article>
+      {% endfor %}
+    </div>
+
+    <div class="empty-state glass" data-filter-empty="certificates" hidden>
+      <span class="empty-state__icon"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span>
+      <h3>No certificates in this category yet.</h3>
+      <p>Try another filter to see more of the collection.</p>
+    </div>
+
+    <div class="cert-note glass" data-reveal>
+      <span class="cert-note__icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+      <div>
+        <strong>About these certificates</strong>
+        <p>All certificates were issued by <strong>Mohirdev</strong> after completing online courses. The originals are in Uzbek; titles have been translated into English for this portfolio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.html" %}
+{% endblock %}
+
+{% block modals %}
+<div class="modal" id="certificateModal" data-cert-modal aria-hidden="true">
+  <div class="modal__scrim" data-cert-close></div>
+  <div class="modal__dialog modal__dialog--cert glass" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+    <div class="modal__top">
+      <span class="eyebrow" data-cert-modal-category>Certificate</span>
+      <button class="icon-btn" type="button" data-cert-close aria-label="Close certificate viewer">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+    <div class="cert-modal__body">
+      <div class="cert-modal__visual">
+        <img data-cert-modal-image src="" alt="">
+        <div class="cert-modal__nav">
+          <button class="icon-btn icon-btn--light" type="button" data-cert-prev aria-label="Previous certificate">
+            <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+          </button>
+          <button class="icon-btn icon-btn--light" type="button" data-cert-next aria-label="Next certificate">
+            <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="cert-modal__info">
+        <div class="cert-modal__meta">
+          <span class="cert-modal__id" data-cert-modal-id></span>
+          <span class="cert-modal__issuer"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg><span data-cert-modal-issuer></span></span>
+        </div>
+        <h2 id="certModalTitle" data-cert-modal-title></h2>
+        <p class="cert-modal__description" data-cert-modal-description></p>
+        <div class="tag-row" data-cert-modal-skills></div>
+        <div class="cert-modal__footer">
+          <span class="chip chip--live"><span class="status-dot"></span>Verified learning</span>
+          <span class="cert-modal__counter" data-cert-modal-counter></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

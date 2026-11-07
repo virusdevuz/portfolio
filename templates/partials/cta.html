@@ -1,0 +1,24 @@
+<section class="section">
+  <div class="container">
+    <div class="cta-panel glass" data-reveal>
+      <div class="cta-panel__glow" aria-hidden="true"></div>
+      <span class="eyebrow"><span class="status-dot"></span>Let's work together</span>
+      <h2>Have a project in mind? <span class="text-gradient">Let's make it real.</span></h2>
+      <p>Tell me what you are building, what matters most and when you need it. I will reply with honest thoughts and a clear next step.</p>
+      <div class="cta-panel__actions">
+        <a class="btn btn--primary" href="{% url 'contact' %}">
+          <span>Start a conversation</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>
+        </a>
+        <a class="btn btn--glass" href="mailto:{{ site.email }}">
+          <span>{{ site.email }}</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+        </a>
+      </div>
+      <div class="cta-panel__meta">
+        <span><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Replies within 24 hours</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>{{ site.city }}</span>
+      </div>
+    </div>
+  </div>
+</section>

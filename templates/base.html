@@ -1,0 +1,246 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page_title %}{{ page_title }} — {% endif %}{{ site.name }} | {{ site.role }}</title>
+  <meta name="description" content="{{ page_description|default:site.bio_short }}">
+  <meta name="author" content="{{ site.name }}">
+  <meta name="theme-color" content="#06070d">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }} — {{ site.brand }}">
+  <meta property="og:title" content="{% if page_title %}{{ page_title }} — {% endif %}{{ site.name }} | {{ site.role }}">
+  <meta property="og:description" content="{{ page_description|default:site.bio_short }}">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ media_url }}image-majidov-abdurakhmon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page_title %}{{ page_title }} — {% endif %}{{ site.name }}">
+  <meta name="twitter:description" content="{{ page_description|default:site.bio_short }}">
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ media_url }}image-majidov-abdurakhmon.png">
+
+  <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
+  <link rel="apple-touch-icon" href="{{ media_url }}logo-removedbg.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'css/pages.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'css/collections.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'css/contact.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'css/responsive.css' %}?v=1">
+  <script>document.documentElement.classList.add("js");</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ site.name|escapejs }}",
+    "jobTitle": "{{ site.role|escapejs }}",
+    "email": "mailto:{{ site.email|escapejs }}",
+    "telephone": "{{ site.phone_raw|escapejs }}",
+    "url": "{{ request.scheme }}://{{ request.get_host }}/",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Olmazor Street",
+      "addressLocality": "Bukhara",
+      "addressCountry": "UZ"
+    },
+    "knowsAbout": ["Python", "Django", "JavaScript", "TypeScript", "HTML5", "CSS3", "SCSS", "SASS", "Node.js", "REST APIs"]
+  }
+  </script>
+</head>
+<body class="page page--{{ request.resolver_match.url_name }}" id="top" data-page="{{ request.resolver_match.url_name }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  {% include "partials/icons.html" %}
+
+  <div class="page-loader" data-loader aria-hidden="true">
+    <div class="page-loader__inner">
+      <img class="page-loader__logo" src="{{ media_url }}logo-removedbg.png" alt="" width="1536" height="828">
+      <div class="page-loader__bar"><span data-loader-bar></span></div>
+      <p class="page-loader__text">Code · Build · Innovate</p>
+    </div>
+  </div>
+
+  <div class="bg-scene" aria-hidden="true">
+    <div class="bg-scene__orb bg-scene__orb--violet"></div>
+    <div class="bg-scene__orb bg-scene__orb--cyan"></div>
+    <div class="bg-scene__orb bg-scene__orb--pink"></div>
+    <div class="bg-scene__grid"></div>
+    <div class="bg-scene__noise"></div>
+    <div class="bg-scene__spotlight" data-spotlight></div>
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"><span data-scroll-progress></span></div>
+
+  <div class="cursor" data-cursor aria-hidden="true">
+    <span class="cursor__dot"></span>
+    <span class="cursor__ring"></span>
+  </div>
+
+  <header class="site-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="{% url 'home' %}" aria-label="VIRUS — back to home">
+        <img class="brand__logo" src="{{ media_url }}logo-removedbg.png" alt="" width="1536" height="828">
+        <span class="brand__divider" aria-hidden="true"></span>
+        <span class="brand__text">
+          <strong>Majidov</strong>
+          <small>Portfolio</small>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        {% for item in nav_items %}
+          <a class="nav__link{% if request.resolver_match.url_name == item.url_name %} is-active{% endif %}"
+             href="{% url item.url_name %}"
+             {% if request.resolver_match.url_name == item.url_name %}aria-current="page"{% endif %}>
+            {{ item.name }}
+          </a>
+        {% endfor %}
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn--primary btn--sm nav-cta" href="{% url 'contact' %}">
+          <span>Let's talk</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+        </a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" data-mobile-menu aria-hidden="true">
+    <div class="mobile-menu__scrim" data-menu-close></div>
+    <div class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="Site navigation">
+      <div class="mobile-menu__top">
+        <span class="eyebrow"><span class="status-dot"></span>{{ site.availability }}</span>
+        <button class="icon-btn" type="button" data-menu-close aria-label="Close menu">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        {% for item in nav_items %}
+          <a class="mobile-nav__link{% if request.resolver_match.url_name == item.url_name %} is-active{% endif %}"
+             href="{% url item.url_name %}" data-menu-link>
+            <span class="mobile-nav__index">0{{ forloop.counter }}</span>
+            <span class="mobile-nav__label">{{ item.name }}</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+          </a>
+        {% endfor %}
+      </nav>
+
+      <div class="mobile-menu__footer">
+        <div class="mobile-menu__contact">
+          <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+          <a href="tel:{{ site.phone_raw }}">{{ site.phone }}</a>
+        </div>
+        <p>{{ site.location }}</p>
+        <div class="mobile-menu__socials">
+          {% for social in socials %}
+            <a class="icon-btn" href="{{ social.href }}" aria-label="{{ social.label }}"{% if social.href|slice:":4" == "http" %} target="_blank" rel="noopener noreferrer"{% endif %}>
+              <svg class="icon" aria-hidden="true"><use href="#i-{{ social.icon }}"/></svg>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if messages %}
+    <div class="flash-stack" data-flash-stack>
+      {% for message in messages %}
+        <div class="flash flash--{{ message.tags }}" role="status" data-flash>
+          <span class="flash__icon">
+            <svg class="icon" aria-hidden="true"><use href="#i-{% if message.tags == 'success' %}check-circle{% else %}sparkles{% endif %}"/></svg>
+          </span>
+          <p>{{ message }}</p>
+          <button class="flash__close" type="button" data-flash-close aria-label="Dismiss notification">
+            <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <main id="main" class="site-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand brand--footer" href="{% url 'home' %}" aria-label="VIRUS — home">
+            <img class="brand__logo" src="{{ media_url }}logo-removedbg.png" alt="VIRUS Web Developer" width="1536" height="828">
+          </a>
+          <p>{{ site.bio_short }}</p>
+          <div class="footer__status">
+            <span class="status-dot"></span>
+            <span>{{ site.availability }}</span>
+          </div>
+          <div class="footer__socials">
+            {% for social in socials %}
+              <a class="icon-btn" href="{{ social.href }}" aria-label="{{ social.label }}"{% if social.href|slice:":4" == "http" %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                <svg class="icon" aria-hidden="true"><use href="#i-{{ social.icon }}"/></svg>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <nav class="footer__col" aria-label="Footer navigation">
+          <h3>Navigate</h3>
+          {% for item in nav_items %}
+            <a href="{% url item.url_name %}">{{ item.name }}</a>
+          {% endfor %}
+        </nav>
+
+        <div class="footer__col">
+          <h3>Services</h3>
+          <a href="{% url 'services' %}#frontend">Frontend</a>
+          <a href="{% url 'services' %}#backend">Backend</a>
+          <a href="{% url 'services' %}#fullstack-python">Full-Stack Python</a>
+          <a href="{% url 'services' %}#nodejs">Node.js</a>
+        </div>
+
+        <div class="footer__col footer__col--contact">
+          <h3>Get in touch</h3>
+          <a href="mailto:{{ site.email }}">
+            <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+            {{ site.email }}
+          </a>
+          <a href="tel:{{ site.phone_raw }}">
+            <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+            {{ site.phone }}
+          </a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Bukhara%2C+Uzbekistan" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>
+            {{ site.city }}
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© {{ current_year }} {{ site.name }}. All rights reserved.</p>
+        <p class="footer__made">Designed &amp; built with <svg class="icon icon--heart" aria-hidden="true"><use href="#i-heart"/></svg> in Bukhara.</p>
+        <a class="footer__top" href="#top">Back to top <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
+      </div>
+    </div>
+    <div class="footer__watermark" aria-hidden="true">VIRUS</div>
+  </footer>
+
+  <button class="to-top" type="button" data-to-top aria-label="Back to top">
+    <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+  </button>
+
+  {% block modals %}{% endblock %}
+
+  <script src="{% static 'js/main.js' %}?v=1" defer></script>
+</body>
+</html>

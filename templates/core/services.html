@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container page-hero__grid">
+    <div class="page-hero__copy">
+      <div class="eyebrow" data-reveal>Services <span class="eyebrow__sep"></span> What I can build for you</div>
+      <h1 class="page-hero__title" data-reveal data-delay="1">Services that <span class="text-gradient">ship.</span></h1>
+      <p class="page-hero__lead" data-reveal data-delay="2">
+        From a single landing page to a complete full-stack product, I care about the
+        details that make a website feel fast, clear and genuinely good to use.
+      </p>
+      <div class="hero__actions" data-reveal data-delay="3">
+        <a class="btn btn--primary" href="{% url 'contact' %}">
+          <span>Tell me about your idea</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>
+        </a>
+        <a class="btn btn--glass" href="{% url 'projects' %}">
+          <span>See my projects</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="page-hero__aside" data-reveal data-delay="2">
+      <div class="code-card glass">
+        <div class="code-card__bar">
+          <span></span><span></span><span></span>
+          <em>services.py</em>
+        </div>
+        <pre class="code-card__code"><code><span class="code-key">class</span> <span class="code-fn">Developer</span>:
+    name = <span class="code-str">"Abdyrakhmon"</span>
+    stack = [<span class="code-str">"Python"</span>, <span class="code-str">"Django"</span>, <span class="code-str">"JS"</span>]
+    focus = <span class="code-str">"clean, useful products"</span>
+
+    <span class="code-key">def</span> <span class="code-fn">build</span>(self, idea):
+        <span class="code-key">return</span> <span class="code-str">"something people love"</span></code></pre>
+        <div class="code-card__footer">
+          <span class="status-dot"></span>
+          <span>Available for new projects</span>
+          <span class="code-card__cursor" aria-hidden="true"></span>
+        </div>
+      </div>
+      <span class="page-hero__orb page-hero__orb--1" aria-hidden="true"></span>
+      <span class="page-hero__orb page-hero__orb--2" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="service-detail-grid">
+      {% for service in services %}
+        <article class="service-detail glass spotlight" id="{{ service.slug }}" data-spotlight-card data-reveal data-delay="{{ forloop.counter0 }}">
+          <div class="service-detail__head">
+            <span class="service-detail__icon accent--{{ service.accent }}">
+              <svg class="icon" aria-hidden="true"><use href="#i-{{ service.icon }}"/></svg>
+            </span>
+            <span class="service-detail__number">{{ service.number }}</span>
+          </div>
+          <h2>{{ service.title }}</h2>
+          <p class="service-detail__tagline">{{ service.tagline }}</p>
+          <p class="service-detail__description">{{ service.description }}</p>
+          <ul class="feature-list">
+            {% for feature in service.features %}
+              <li>
+                <span class="feature-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+                {{ feature }}
+              </li>
+            {% endfor %}
+          </ul>
+          <div class="service-detail__footer">
+            <div class="tag-row">
+              {% for tech in service.tech %}
+                <span class="tag">{{ tech }}</span>
+              {% endfor %}
+            </div>
+            <a class="icon-btn" href="{% url 'contact' %}?service={{ service.contact_value }}" aria-label="Discuss {{ service.title }}">
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow" data-reveal>The process</span>
+        <h2 class="section-title" data-reveal data-delay="1">From first message to <span class="text-gradient">launch day.</span></h2>
+      </div>
+      <p class="section-head__note" data-reveal data-delay="2">A simple, transparent process — with no mystery in the middle.</p>
+    </div>
+
+    <div class="process-grid">
+      {% for step in process %}
+        <article class="process-card" data-reveal data-delay="{{ forloop.counter0 }}">
+          <div class="process-card__top">
+            <span class="process-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-{{ step.icon }}"/></svg></span>
+            <span class="process-card__number">{{ step.number }}</span>
+          </div>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.description }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="toolbox-panel glass" data-reveal>
+      <div class="toolbox-panel__copy">
+        <span class="eyebrow">The stack</span>
+        <h2 class="section-title">Tools I reach for <span class="text-gradient">every day.</span></h2>
+        <p>I choose the simplest tool that does the job well. These are the technologies I know and enjoy working with.</p>
+      </div>
+      <div class="toolbox-panel__tags">
+        {% for tool in toolbox %}
+          <span class="tag tag--large">{{ tool }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.html" %}
+{% endblock %}

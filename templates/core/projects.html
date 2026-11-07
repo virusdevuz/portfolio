@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container page-hero__grid">
+    <div class="page-hero__copy">
+      <div class="eyebrow" data-reveal>Projects <span class="eyebrow__sep"></span> Selected work</div>
+      <h1 class="page-hero__title" data-reveal data-delay="1">Work that <span class="text-gradient">speaks.</span></h1>
+      <p class="page-hero__lead" data-reveal data-delay="2">
+        A collection of full-stack, frontend and backend projects. Each one started as
+        a question, became a challenge and ended up teaching me something new.
+      </p>
+      <div class="page-hero__meta" data-reveal data-delay="3">
+        <span><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg>{{ total }}+ projects</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>Full-stack &amp; frontend</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Built from scratch</span>
+      </div>
+    </div>
+
+    <div class="page-hero__aside" data-reveal data-delay="2">
+      <div class="project-orbit glass">
+        <div class="project-orbit__ring project-orbit__ring--1" aria-hidden="true"></div>
+        <div class="project-orbit__ring project-orbit__ring--2" aria-hidden="true"></div>
+        <div class="project-orbit__center">
+          <strong>{{ total }}+</strong>
+          <span>projects built</span>
+        </div>
+        <span class="project-orbit__node project-orbit__node--1"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></span>
+        <span class="project-orbit__node project-orbit__node--2"><svg class="icon" aria-hidden="true"><use href="#i-server"/></svg></span>
+        <span class="project-orbit__node project-orbit__node--3"><svg class="icon" aria-hidden="true"><use href="#i-layout"/></svg></span>
+        <span class="project-orbit__node project-orbit__node--4"><svg class="icon" aria-hidden="true"><use href="#i-database"/></svg></span>
+      </div>
+      <span class="page-hero__orb page-hero__orb--1" aria-hidden="true"></span>
+      <span class="page-hero__orb page-hero__orb--2" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="filter-bar glass" data-filter-group="projects" role="group" aria-label="Filter projects by category">
+      {% for category in categories %}
+        <button class="filter-btn{% if forloop.first %} is-active{% endif %}" type="button" data-filter="{{ category }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+          {{ category }}
+          {% if forloop.first %}<span class="filter-btn__count">{{ total }}</span>{% endif %}
+        </button>
+      {% endfor %}
+    </div>
+
+    <div class="project-grid" data-filter-grid="projects">
+      {% for project in projects %}
+        <article class="project-card glass{% if forloop.first %} project-card--featured{% endif %}" id="{{ project.slug }}" data-category="{{ project.category }}" data-reveal data-delay="{{ forloop.counter0 }}">
+          <button class="project-card__button" type="button"
+                  data-project-open
+                  data-project-slug="{{ project.slug }}"
+                  data-project-title="{{ project.title }}"
+                  data-project-category="{{ project.category }}"
+                  data-project-tagline="{{ project.tagline }}"
+                  data-project-description="{{ project.long_description }}"
+                  data-project-features="{{ project.features|join:'|' }}"
+                  data-project-stack="{{ project.stack|join:'|' }}"
+                  data-project-year="{{ project.year }}"
+                  data-project-status="{{ project.status }}"
+                  data-project-theme="{{ project.theme }}"
+                  data-project-monogram="{{ project.monogram }}"
+                  data-project-icon="{{ project.icon }}"
+                  aria-label="Open {{ project.title }} case study">
+            <span class="project-cover project-cover--{{ project.theme }}">
+              <span class="project-cover__browser">
+                <span></span><span></span><span></span>
+                <em>{{ project.slug }}.dev</em>
+              </span>
+              <span class="project-cover__glow" aria-hidden="true"></span>
+              <span class="project-cover__monogram">{{ project.monogram }}</span>
+              <span class="project-cover__icon">
+                <svg class="icon" aria-hidden="true"><use href="#i-{{ project.icon }}"/></svg>
+              </span>
+              <span class="project-cover__chips">
+                {% for tech in project.stack|slice:":3" %}
+                  <span>{{ tech }}</span>
+                {% endfor %}
+              </span>
+              <span class="project-cover__open"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
+            </span>
+            <span class="project-card__body">
+              <span class="project-card__meta">
+                <span>{{ project.category }}</span>
+                <span>{{ project.year }} · {{ project.status }}</span>
+              </span>
+              <strong class="project-card__title">{{ project.title }}</strong>
+              <span class="project-card__tagline">{{ project.tagline }}</span>
+              <span class="project-card__description">{{ project.description }}</span>
+              <span class="project-card__footer">
+                <span class="tag-row">
+                  {% for tech in project.stack|slice:":3" %}
+                    <span class="tag">{{ tech }}</span>
+                  {% endfor %}
+                </span>
+                <span class="link-arrow">Case study <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+              </span>
+            </span>
+          </button>
+        </article>
+      {% endfor %}
+
+      <article class="project-more glass" data-filter-static data-reveal>
+        <span class="project-more__icon"><svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg></span>
+        <h3>More projects are on the way.</h3>
+        <p>I am always building something new. The next idea is already in a notebook somewhere.</p>
+        <a class="link-arrow" href="{% url 'contact' %}">Build with me <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+      </article>
+    </div>
+
+    <div class="empty-state glass" data-filter-empty="projects" hidden>
+      <span class="empty-state__icon"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span>
+      <h3>No projects in this category yet.</h3>
+      <p>Try another filter or get in touch — I would love to build the next one with you.</p>
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.html" %}
+{% endblock %}
+
+{% block modals %}
+<div class="modal" id="projectModal" data-project-modal aria-hidden="true">
+  <div class="modal__scrim" data-project-close></div>
+  <div class="modal__dialog modal__dialog--project glass" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+    <div class="modal__top">
+      <span class="eyebrow">Case study</span>
+      <button class="icon-btn" type="button" data-project-close aria-label="Close project details">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+    <div class="project-modal__scroll">
+      <div class="project-cover project-cover--violet" data-project-modal-cover>
+        <span class="project-cover__browser">
+          <span></span><span></span><span></span>
+          <em data-project-modal-url>project.dev</em>
+        </span>
+        <span class="project-cover__glow" aria-hidden="true"></span>
+        <span class="project-cover__monogram" data-project-modal-monogram>VP</span>
+        <span class="project-cover__icon">
+          <svg class="icon" aria-hidden="true"><use href="#i-code" data-project-modal-icon/></svg>
+        </span>
+        <span class="project-cover__chips" data-project-modal-chips></span>
+      </div>
+      <div class="project-modal__body">
+        <div class="project-modal__meta">
+          <span class="chip" data-project-modal-category>Full-Stack</span>
+          <span data-project-modal-year>2026</span>
+          <span class="project-modal__status"><span class="status-dot"></span><span data-project-modal-status>Live</span></span>
+        </div>
+        <h2 id="projectModalTitle" data-project-modal-title></h2>
+        <p class="project-modal__tagline" data-project-modal-tagline></p>
+        <p class="project-modal__description" data-project-modal-description></p>
+        <div class="project-modal__columns">
+          <div>
+            <h3>Highlights</h3>
+            <ul class="feature-list" data-project-modal-features></ul>
+          </div>
+          <div>
+            <h3>Stack</h3>
+            <div class="tag-row" data-project-modal-stack></div>
+          </div>
+        </div>
+        <div class="project-modal__footer">
+          <a class="btn btn--primary" href="{% url 'contact' %}?service=fullstack">
+            <span>Build something like this</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+          </a>
+          <span class="project-modal__note">Personal project · built to learn and ship</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
