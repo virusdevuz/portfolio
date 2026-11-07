@@ -1,1 +1,15 @@
+# VIRUS Portfolio — Majidov Abdyrakhmon
+# A modern, responsive liquid-glass portfolio website built with Python and Django.
+#
+# Install dependencies:
+#   python -m pip install -r requirements.txt
+#
+# Set up and run:
+#   python manage.py migrate
+#   python manage.py createsuperuser   (optional, for the contact inbox)
+#   python manage.py runserver
+#
+# Site:  http://127.0.0.1:8000/
+# Admin: http://127.0.0.1:8000/admin/
+
 Django==6.1.3
