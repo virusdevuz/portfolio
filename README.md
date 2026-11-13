@@ -20,7 +20,7 @@ A modern, fully responsive **liquid-glass portfolio website** built with **Pytho
 | **Frontend** | HTML5 · CSS3 · Vanilla JavaScript |
 | **Fonts** | Sora · Manrope · JetBrains Mono (Google Fonts) |
 
-The portfolio includes **6 pages**, **10 certificates**, **6 showcase projects** and **6 services**. All content is in English.
+The portfolio includes **6 pages**, **13 certificates**, **6 showcase projects** and **6 services**. All content is in English.
 
 ---
 

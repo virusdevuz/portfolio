@@ -59,8 +59,8 @@ def certificates(request):
     context = {
         "page_title": "Certificates",
         "page_description": (
-            "Ten verified course certificates in frontend development, Python, "
-            "TypeScript, Bootstrap and computer science."
+            "Thirteen verified course certificates in frontend development, Python, "
+            "Django, Laravel, TypeScript, Bootstrap and computer science."
         ),
         "certificates": data.CERTIFICATES,
         "categories": data.CERTIFICATE_CATEGORIES,

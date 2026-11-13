@@ -34,7 +34,7 @@ NAV_ITEMS = [
 
 STATS = [
     {"value": 3, "suffix": "+", "label": "Years of coding", "icon": "clock"},
-    {"value": 10, "suffix": "+", "label": "Certificates earned", "icon": "award"},
+    {"value": 13, "suffix": "+", "label": "Certificates earned", "icon": "award"},
     {"value": 12, "suffix": "+", "label": "Projects built", "icon": "folder"},
     {"value": 6, "suffix": "+", "label": "Core technologies", "icon": "cpu"},
 ]
@@ -361,6 +361,42 @@ CERTIFICATES = [
             "a strong next step after mastering the fundamentals."
         ),
         "skills": ["TypeScript", "Types", "Interfaces"],
+    },
+    {
+        "id": "C-11",
+        "title": "SOLID Principles",
+        "category": "Programming",
+        "issuer": "Mohirdev",
+        "image": "certificates/web/solid-principles.png",
+        "description": (
+            "The five SOLID principles of object-oriented design — writing code that "
+            "is easier to understand, extend and maintain."
+        ),
+        "skills": ["SOLID", "OOP", "Clean code"],
+    },
+    {
+        "id": "C-12",
+        "title": "Laravel PHP Framework — For Beginners",
+        "category": "Programming",
+        "issuer": "Mohirdev",
+        "image": "certificates/web/laravel-php-framework.png",
+        "description": (
+            "Routing, controllers, Blade templates and Eloquent models — building "
+            "structured web applications with the Laravel PHP framework."
+        ),
+        "skills": ["Laravel", "PHP", "MVC", "Eloquent"],
+    },
+    {
+        "id": "C-13",
+        "title": "Django 3 — Full-Stack Web Development with Python",
+        "category": "Programming",
+        "issuer": "Mohirdev",
+        "image": "certificates/web/django-full-stack-development.png",
+        "description": (
+            "Full-stack development with Django 3 — models, views, templates, "
+            "authentication and building complete Python-powered web applications."
+        ),
+        "skills": ["Django", "Python", "Full-Stack", "MVC"],
     },
 ]
 
